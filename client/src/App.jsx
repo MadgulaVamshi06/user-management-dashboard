@@ -3,6 +3,7 @@ import Home from "./Pages/Home";
 import Create from "./Components/Create";
 import Update from "./Components/Update";
 import Read from "./Components/Read";
+import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   return (

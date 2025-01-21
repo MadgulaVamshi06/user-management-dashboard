@@ -1,9 +1,9 @@
 import React from 'react'
 
-function Edit() {
+function Update() {
   return (
-    <div>Edit</div>
+    <div>Update</div>
   )
 }
 
-export default Edit
+export default Update

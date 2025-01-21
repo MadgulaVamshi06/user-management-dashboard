@@ -1,7 +1,9 @@
 import React from 'react'
 
-export default function Create() {
+const Create = () => {
   return (
     <div>Create</div>
   )
 }
+
+export default Create
