@@ -1,24 +1,42 @@
 import React, { useEffect, useState } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [users, setUsers] = useState([]);
+  const navigate = useNavigate();
 
-  const [userData, setuserData] = useState(null);
-    const navigate = useNavigate();
+  const LoadDetail = (id) => {
+    navigate("/users/detail/" + id);
+  };
 
-    const LoadDetail = (id) => {
-        navigate("/detail/" + id);
+  const LoadEdit = (id) => {
+    navigate("/users/update/" + id);
+  };
+
+  const Removefunction = (id) => {
+    if (window.confirm('Do you want to remove?')) {
+      fetch(`http://localhost:5000/users/${id}`, {
+        method: "DELETE",
+      })
+      .then((res) => {
+        if (res.ok) {
+          alert('Removed successfully.');
+          // Remove the deleted user from the state
+          setUsers(users.filter(user => user.id !== id));
+        } else {
+          throw new Error('Failed to remove the user');
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
     }
-    const LoadEdit = (id) => {
-        navigate("update/" + id);
-    }
+  };
+  
 
   useEffect(() => {
     fetch("http://localhost:5000/users")
-      .then((res) => {
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((resp) => {
         setUsers(resp);
       })
@@ -26,6 +44,7 @@ const Home = () => {
         console.log(err.message);
       });
   }, []);
+
   return (
     <div className="container">
       <div className="card">
@@ -33,8 +52,8 @@ const Home = () => {
           <h2>Users List</h2>
         </div>
         <div className="card-body">
-        <div className="divbtn">
-            <Link to='/create'  className='btn btn-success'>Add New +</Link>
+          <div className="divbtn">
+            <Link to='/users/create' className='btn btn-success'>Add New +</Link>
           </div>
           <table className="table table-bordered">
             <thead className="bg-dark text-white">
@@ -57,8 +76,8 @@ const Home = () => {
                   <td>{user.company}</td>
                   <td>
                     <a onClick={() => { LoadEdit(user.id) }} className="btn btn-success">Edit</a>
-                    <a onClick={() => { LoadDetail(user.id) }}  className="btn btn-success">Details</a>
-                    <a onClick={() => { Removefunction(user.id) }}  className="btn btn-danger">Remove</a>
+                    <a onClick={() => { LoadDetail(user.id) }} className="btn btn-success">Details</a>
+                    <a onClick={() => { Removefunction(user.id) }} className="btn btn-danger">Remove</a>
                   </td>
                 </tr>
               ))}
