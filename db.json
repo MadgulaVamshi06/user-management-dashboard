@@ -2,8 +2,8 @@
   "users": [
     {
       "id": "1",
-      "lastname": "Leanne Graham",
-      "firstname": "Bret",
+      "lastname": "wdfe",
+      "firstname": "defwg",
       "email": "Sincere@april.biz",
       "company": "Romaguera-Crona"
     },
@@ -69,13 +69,6 @@
       "firstname": "Moriah.Stanton",
       "email": "Rey.Padberg@karina.biz",
       "company": "Hoeger LLC"
-    },
-    {
-      "id": "11",
-      "lastname": "abc",
-      "email": "abc@gmail.com",
-      "firstname": "abc",
-      "company": "abc"
     }
   ]
 }
