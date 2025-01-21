@@ -3,11 +3,11 @@ import { Link, useParams } from "react-router-dom";
 
 const UserDetails = () => {
   const { userid } = useParams();
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState(null);
    
   useEffect(() => {
     if (userid) {
-      fetch(`http://localhost:5000/users/${userid}`)
+      fetch(`https://jsonplaceholder.typicode.com/users/${userid}`)
         .then((res) => res.json())
         .then((resp) => {
           setUserData(resp);
@@ -19,9 +19,6 @@ const UserDetails = () => {
   }, [userid]);
   
 
-  
-  const fullName = userData.firstname && userData.lastname ? `${userData.firstname} ${userData.lastname}` : '';
-
   return (
     <div className="container">
       <div className="card row" style={{ textAlign: "left" }}>
@@ -29,17 +26,20 @@ const UserDetails = () => {
           <h2>User Details</h2>
         </div>
         <div className="card-body">
-          {userData && (
+          {userData ? (
             <div>
               <h2>
-                The User name is : <b>{fullName}</b> ({userData.id})
+                The User name is : <b>{userData.name}</b> 
               </h2>
-              <h5>Email is : {userData.email}</h5>
-              <h5>Company is : {userData.company}</h5>
+              <h5>User Id :{userData.id}</h5>
+              <h5>Email  : {userData.email}</h5>
+              <h5>Company  : {userData.company?.name || "N/A"}</h5>
               <Link className="btn btn-danger" to="/">
                 Back to Listing
               </Link>
             </div>
+          ) : (
+            <p>Loading...</p>
           )}
         </div>
       </div>

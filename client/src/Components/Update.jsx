@@ -5,24 +5,24 @@ function Update() {
   const { userid } = useParams();
   const navigate = useNavigate();
 
-  // State Initialization
+ 
   const [updatedUserId, setUpdatedUserId] = useState("");
-  const [updatedLastName, setUpdatedLastName] = useState("");
+  const [updatedName, setUpdatedName] = useState("");
   const [updatedEmail, setUpdatedEmail] = useState("");
-  const [updatedFirstName, setUpdatedFirstName] = useState("");
+  const [updatedUserName, setUpdatedUserName] = useState("");
   const [updatedCompanyName, setUpdatedCompanyName] = useState("");
   const [emailValidationError, setEmailValidationError] = useState("");
   
   useEffect(() => {
-    // Fetching existing user data
-    fetch(`http://localhost:5000/users/${userid}`)
+    
+    fetch(`https://jsonplaceholder.typicode.com/users/${userid}`)
       .then((res) => res.json())
       .then((resp) => {
         setUpdatedUserId(resp.id);
-        setUpdatedLastName(resp.name);
-        setUpdatedFirstName(resp.name);
+        setUpdatedName(resp.name);
+        setUpdatedUserName(resp.name);
         setUpdatedEmail(resp.email);
-        setUpdatedCompanyName(resp.company);
+        setUpdatedCompanyName(resp.company.name);
       })
       .catch((err) => {
         console.log(err.message);
@@ -33,14 +33,14 @@ function Update() {
     e.preventDefault();
     const data = {
       id: updatedUserId,
-      lastname: updatedLastName,
-      firstname: updatedFirstName,
+      lastname: updatedName,
+      firstname: updatedUserName,
       email: updatedEmail,
       company: updatedCompanyName,
     };
 
-    // Updating user data
-    fetch(`http://localhost:5000/users/${userid}`, {
+    
+    fetch(`https://jsonplaceholder.typicode.com/users/${userid}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -77,7 +77,7 @@ function Update() {
                       <input
                         type="number"
                         value={updatedUserId}
-                        onChange={(e) => setUpdatedUserId(e.target.value)} // Allow editing of the ID
+                        onChange={(e) => setUpdatedUserId(e.target.value)} 
                         className="form-control"
                       />
                     </div>
@@ -85,11 +85,11 @@ function Update() {
 
                   <div className="col-lg-12">
                     <div className="form-group">
-                      <label>Last Name</label>
+                      <label> Name</label>
                       <input
                         required
-                        value={updatedLastName}
-                        onChange={(e) => setUpdatedLastName(e.target.value)}
+                        value={updatedName}
+                        onChange={(e) => setUpdatedName(e.target.value)}
                         className="form-control"
                       />
                     </div>
@@ -97,11 +97,11 @@ function Update() {
 
                   <div className="col-lg-12">
                     <div className="form-group">
-                      <label>First Name</label>
+                      <label>User Name</label>
                       <input
                         required
-                        value={updatedFirstName}
-                        onChange={(e) => setUpdatedFirstName(e.target.value)}
+                        value={updatedUserName}
+                        onChange={(e) => setUpdatedUserName(e.target.value)}
                         className="form-control"
                       />
                     </div>
@@ -114,7 +114,7 @@ function Update() {
                         value={updatedEmail}
                         onChange={(e) => {
                           setUpdatedEmail(e.target.value);
-                          setEmailValidationError(""); // Clear error on email change
+                          setEmailValidationError(""); 
                         }}
                         className="form-control"
                       />

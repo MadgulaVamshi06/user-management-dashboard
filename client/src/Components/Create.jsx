@@ -3,9 +3,9 @@ import { useNavigate, Link } from "react-router-dom";
 
 const Create = () => {
   const [id, setId] = useState("");
-  const [lastname, setLastName] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [firstname, setFirstname] = useState("");
+  const [username, setUsername] = useState("");
   const [company, setCompany] = useState("");
   const [validation, setValidation] = useState(false);
   const [emailError, setEmailError] = useState("");
@@ -27,13 +27,13 @@ const Create = () => {
 
     const data = {
       id,
-      lastname,
-      firstname,
+      name,
+      username,
       email,
       company,
     };
 
-    fetch("http://localhost:5000/users", {
+    fetch("https://jsonplaceholder.typicode.com/users", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -80,9 +80,9 @@ const Create = () => {
                       <label>Last Name</label>
                       <input
                         required
-                        value={lastname}
+                        value={name}
                         onMouseDown={(e) => setValidation(true)}
-                        onChange={(e) => setLastName(e.target.value)}
+                        onChange={(e) => setName(e.target.value)}
                         className="form-control"
                       ></input>
                     </div>
@@ -93,9 +93,9 @@ const Create = () => {
                       <label>First Name</label>
                       <input
                         required
-                        value={firstname}
+                        value={username}
                         onMouseDown={(e) => setValidation(true)}
-                        onChange={(e) => setFirstname(e.target.value)}
+                        onChange={(e) => setUsername(e.target.value)}
                         className="form-control"
                       ></input>
                     </div>

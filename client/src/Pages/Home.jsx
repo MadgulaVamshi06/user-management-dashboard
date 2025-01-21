@@ -15,13 +15,12 @@ const Home = () => {
 
   const Removefunction = (id) => {
     if (window.confirm('Do you want to remove?')) {
-      fetch(`http://localhost:5000/users/${id}`, {
+      fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
         method: "DELETE",
       })
       .then((res) => {
         if (res.ok) {
           alert('Removed successfully.');
-          // Remove the deleted user from the state
           setUsers(users.filter(user => user.id !== id));
         } else {
           throw new Error('Failed to remove the user');
@@ -35,7 +34,7 @@ const Home = () => {
   
 
   useEffect(() => {
-    fetch("http://localhost:5000/users")
+    fetch("https://jsonplaceholder.typicode.com/users")
       .then((res) => res.json())
       .then((resp) => {
         setUsers(resp);
@@ -59,8 +58,8 @@ const Home = () => {
             <thead className="bg-dark text-white">
               <tr>
                 <th>ID</th>
-                <th>Last Name</th>
-                <th>First name</th>
+                <th>Name</th>
+                <th>User Name</th>
                 <th>Email</th>
                 <th>Company</th>
                 <th>Action</th>
@@ -70,10 +69,10 @@ const Home = () => {
               {users.map((user) => (
                 <tr key={user.id}>
                   <td>{user.id}</td>
-                  <td>{user.lastname}</td>
-                  <td>{user.firstname}</td>
+                  <td>{user.name}</td>
+                  <td>{user.username}</td>
                   <td>{user.email}</td>
-                  <td>{user.company}</td>
+                  <td>{user.company.name}</td>
                   <td>
                     <a onClick={() => { LoadEdit(user.id) }} className="btn btn-success">Edit</a>
                     <a onClick={() => { LoadDetail(user.id) }} className="btn btn-success">Details</a>
