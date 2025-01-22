@@ -23,8 +23,11 @@ This project is a responsive User Management Dashboard built with **React**, pro
 This project uses [JSONPlaceholder](https://jsonplaceholder.typicode.com/) as a mock API for demonstration purposes. The following endpoints are used:
 
 GET /users: Fetch all users
+
 POST /users: Add a new user
+
 PUT /users/:id: Update a user
+
 DELETE /users/:id: Delete a user
 
 ## Screenshots
